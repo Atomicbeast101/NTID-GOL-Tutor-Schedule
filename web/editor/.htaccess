@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "NTID GOL Tutor Lab Schedule Editor"
+AuthUserFile "<REMOVED>"
+Require valid-user

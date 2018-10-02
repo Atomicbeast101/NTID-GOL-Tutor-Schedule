@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>NTID GOL Lab - Tutors</title>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <link rel="stylesheet" href="assets/css/main.css">
+        <script src='assets/js/main.js'></script>
+    </head>
+    <body>
+        <header>
+            <div class='left'>
+                <h1>NTID GOL Lab Tutors</h1>
+            </div>
+            <div class='right'>
+                <a href='index.html'>Home</a>
+            </div>
+        </header>
+        <div class='tutors'>
+            <h2>Search Tutor by Skill</h2>
+            <div id='filter_skills'></div>
+            <script>
+                var success = false;
+                try {
+                    $.getJSON('http://127.0.0.1:9000/all_skills', function(data) {
+                        if(data['status'] == 'success') {
+                            success = true;
+                            var skills_html = '';
+                            for(var id in data['data'])
+                                skills_html += '<button onclick="filterSkill(this)">' + data['data'][id] + '</button>';
+                            document.getElementById('filter_skills').innerHTML = skills_html;
+                        }
+                    });
+                }
+                catch(Exception) {
+                    console.log('ERROR: Unable to access server!');
+                    success = false;
+                }
+                if(!success)
+                    document.getElementById('filter_skills').innerHTML = '<button class="red">ERROR</button>';
+            </script>
+            <button class='func' onclick="clearSkillFilter()">Clear All</button>
+            <div id='all-tutors'></div>
+            <script>
+                var success = false;
+                try {
+                    $.getJSON('http://127.0.0.1:9000/all_tutors', function(data) {
+                        if(data['status'] == 'success') {
+                            success = true;
+                            var tutors_html = '';
+                            for(var tutor in data['data']) {
+                                tutors_html += '<div class="tutor-profile">';
+                                tutors_html += '    <div class="tutor-color ' + data['data'][tutor]['color'] + '"></div>';
+                                var imageURL = 'assets/img/' + data['data'][tutor]['name'] + '.jpg';
+                                if(imageExists(imageURL))
+                                    tutors_html += '    <div class="tutor-img"><img src="assets/img/' + data['data'][tutor]['name'] + '.jpg" /></div>';
+                                else
+                                    tutors_html += '    <div class="tutor-img"><img src="assets/img/example_profile.jpg" /></div>';
+                                tutors_html += '    <div class="tutor-bio">';
+                                tutors_html += '        <h3>' + data['data'][tutor]['name'].replace('_', ' ') + '</h3>';
+                                tutors_html += '        <h4>' + data['data'][tutor]['position'] + '</h4>';
+                                tutors_html += '        <span class="major ' + data['data'][tutor]['color'] + '">' + data['data'][tutor]['major'] + '</span><br />';
+                                tutors_html += '        <a class="email" href="mailto:' + data['data'][tutor]['email'] + '">' + data['data'][tutor]['email'] + '</a>';
+                                tutors_html += '        <div class="skills">';
+                                for(var id in data['data'][tutor]['skills'])
+                                    tutors_html += '            <span class="skill">' + data['data'][tutor]['skills'][id] + '</span>';
+                                tutors_html += '        </div>';
+                                tutors_html += '    </div>';
+                                tutors_html += '</div>';
+                            }
+                            document.getElementById('all-tutors').innerHTML = tutors_html;
+                        }
+                    });
+                }
+                catch(Exception) {
+                    console.log('ERROR: Unable to access server!');
+                    success = false;
+                }
+                if(!success) {
+                    var tutors_html = '';
+                    for(var i = 0; i < 1; i++) {
+                        tutors_html += '<div class="tutor-profile">';
+                        tutors_html += '    <div class="tutor-color red"></div>';
+                        tutors_html += '    <div class="tutor-img"><img src="assets/img/example_profile.jpg" /></div>';
+                        tutors_html += '    <div class="tutor-bio">';
+                        tutors_html += '        <h3>ERROR</h3>';
+                        tutors_html += '        <h4></h4>';
+                        tutors_html += '        <span class="major red">ERROR</span><br />';
+                        tutors_html += '        <a class="email">error@example.com</a>';
+                        tutors_html += '        <div class="skills"></div>';
+                        tutors_html += '    </div>';
+                        tutors_html += '</div>';
+                    }
+                    document.getElementById('all-tutors').innerHTML = tutors_html;
+                }
+            </script>
+        </div>
+        <footer>
+            Copyright &copy; RIT/NTID GOL Lab. All Rights Reserved. Developed & Maintained by Adam Brodack.
+        </footer>
+    </body>
+</html>

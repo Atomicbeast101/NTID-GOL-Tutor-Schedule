@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>NTID GOL Lab - Home</title>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <link rel="stylesheet" href="assets/css/main.css">
+    </head>
+    <body>
+        <header>
+            <div class='left'>
+                <h1>NTID GOL Lab Tutor Schedule</h1>
+            </div>
+            <div class='right'>
+                <a href='tutors.html'>All Tutors</a>
+                <a href='editor/index.php'>Edit</a>
+            </div>
+        </header>
+        <div class='calendar'>
+            <table id='week-schedule'></table>
+        </div>
+        <div id='info'>
+            <div id='boxes'>
+		    <div id='lab-status'></div>
+		    <div id='time'><h3>00:00:00 TT</h3></div>
+            </div>
+            <div class='left'>
+                <div class='tutor-profile'>
+                    <div id='tutor_1_color' class='tutor-color black'></div>
+                    <div class='tutor-img'>
+                        <img id='tutor_1_img' src='assets/img/example_profile.jpg' />
+                    </div>
+                    <div class='tutor-bio'>
+                        <h3 id='tutor_1_name'>FULL_NAME</h3>
+                        <h4 id='tutor_1_position'>POSITION_NAME</h4>
+                        <span id='tutor_1_major' class='major black'>MAJOR_NAME</span><br />
+                        <a id='tutor_1_email' class='email' href='mailto:example@example.com'>example@example.com</a>
+                        <div id='tutor_1_skills' class='skills'></div>
+                    </div>
+                </div>
+            </div>
+            <div class='right' style='display: none;'>
+                <div class='tutor-profile'>
+                    <div id='tutor_2_color' class='tutor-color black'></div>
+                    <div class='tutor-img'>
+                        <img id='tutor_2_img' src='assets/img/example_profile.jpg' />
+                    </div>
+                    <div class='tutor-bio'>
+                        <h3 id='tutor_2_name'>FULL_NAME</h3>
+                        <h4 id='tutor_2_position'>POSITION_NAME</h4>
+                        <span id='tutor_2_major' class='major black'>MAJOR_NAME</span><br />
+                        <a id='tutor_2_email' class='email' href='mailto:example@example.com'>example@example.com</a>
+                        <div id='tutor_2_skills' class='skills'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            Copyright &copy; RIT/NTID GOL Lab. All Rights Reserved. Developed & Maintained by Adam Brodack.
+        </footer>
+        <script src='assets/js/main.js'></script>
+    </body>
+</html>
